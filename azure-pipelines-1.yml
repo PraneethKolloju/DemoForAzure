@@ -12,11 +12,13 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '18.x'
   displayName: 'Install Node.js'
 
 - script: |
+    npm install -g npm-check-updates
     npm install
+    npm cache clean --force
     npm run build
   displayName: 'npm install and build'
 - task: Docker@2
