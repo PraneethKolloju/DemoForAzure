@@ -4,11 +4,17 @@ FROM node:20-alpine AS build
 # Set the working directory
 WORKDIR /app
 
+# Install npm-check-updates globally
+RUN npm install -g npm-check-updates
+
 # Copy the package.json and package-lock.json (if available)
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+
+# Clean npm cache forcefully
+RUN npm cache clean --force
 
 # Copy the rest of the application code
 COPY . .
